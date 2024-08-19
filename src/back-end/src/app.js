@@ -9,7 +9,6 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 const isTestEnv = process.env.NODE_ENV === 'test';
-//const allowOrigin = 'https://url-metadata-fetcher-3441.vercel.app'
 
 // Rate limiting configuration for /fetch-metadata route
 const metadataLimiter = rateLimit({
