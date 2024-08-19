@@ -6,10 +6,10 @@ import cors from 'cors';
 import xss from 'xss';
 import csrf from 'csurf';
 import cookieParser from 'cookie-parser';
-import config from './config.js';
 
 const app = express();
 const isTestEnv = process.env.NODE_ENV === 'test';
+//const allowOrigin = 'https://url-metadata-fetcher-3441.vercel.app'
 
 // Rate limiting configuration for /fetch-metadata route
 const metadataLimiter = rateLimit({
@@ -24,10 +24,22 @@ const csrfProtection = csrf({ cookie: true });
 // Middleware setup
 app.use(cookieParser());
 app.use(express.json());
+const allowedOrigins = [
+    'https://url-metadata-fetcher-3441.vercel.app',
+    'http://localhost:3000' // Add other local origins if needed
+];
+
 app.use(cors({
-    origin: config.allowedOrigin, 
-    credentials: true, // Allow credentials (cookies)
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
 }));
+
 
 // Apply CSRF protection conditionally
 const applyCsrfProtection = isTestEnv ? (req, res, next) => next() : csrfProtection;
