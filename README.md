@@ -12,6 +12,7 @@ Table of Contents
     Running the Application
         Back-End
         Front-End
+	Using the Deployed React App
     Testing
     Design Choices
         Architecture
@@ -91,6 +92,20 @@ Front-End
 	
 	Access the Application:
 Open your web browser and navigate to http://localhost:3000 to use the application
+
+Using the Deployed React App
+
+
+If you prefer to use the deployed React application while running the server locally, you can access it via the following URL:
+
+    Deployed React App URL: https://url-metadata-fetcher-3441.vercel.app
+
+To use this, ensure your local back-end server is running, and the REACT_APP_SERVER_URL environment variable is set to point to your local server (e.g., http://localhost:5000).
+
+Access the Application:
+
+Open your web browser and navigate to the deployed React app URL above to use the application.
+
 
 **3. Testing**
 
